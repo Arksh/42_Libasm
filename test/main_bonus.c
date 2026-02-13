@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include "libasm.h"
 
+void print_list(t_list *list)
+{
+	int i = 0;
+	while (list)
+	{
+		printf("  [%d] %s\n", i++, (char *)list->data);
+		list = list->next;
+	}
+}
+
 int ft_list_size_c(t_list *begin_list)
 {
     int count = 0;
@@ -143,6 +153,7 @@ void test_ft_list_push_front()
 	ft_list_push_front(&list_asm, "First");
 	printf("ASM version (size=%d):\n", ft_list_size(list_asm));
 	print_list(list_asm);
+
 	
 	// Test C version
 	t_list *list_c = NULL;

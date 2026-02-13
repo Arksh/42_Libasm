@@ -42,10 +42,10 @@ SRC				= ft_strlen \
 				  ft_strdup
 
 BONUS			= ft_atoi_base_bonus \
-				  #ft_list_push_front_bonus \
-				  #ft_list_size_bonus \
-				  #ft_list_sort_bonus \
-				  #ft_list_remove_if_bonus
+				  ft_list_push_front_bonus \
+				  ft_list_size_bonus \
+# 				  ft_list_sort_bonus \
+# 				  ft_list_remove_if_bonus
 
 # ================================ OBJECTS =================================== #
 
@@ -89,7 +89,7 @@ clean:
 
 fclean: clean
 	@printf "$(_YELLOW)Removing $(NAME)...$(_END)\n"
-	@$(RM) -f $(NAME) $(NAME_BONUS)
+	@$(RM) -f $(NAME) $(NAME_BONUS) main.out main_bonus.out
 	@printf "$(_GREEN)✓ $(NAME) deleted.$(_END)\n"
 
 re: fclean all
@@ -104,3 +104,12 @@ test: all
 test_bonus: bonus
 	@$(CC) -o main_bonus.out test/main_bonus.c -L. -lasm_bonus -I$(INCLUDES)
 	@printf "$(_GREEN)✓ Test program (with bonus) created.$(_END)\n"
+
+play_test: test
+	./main.out
+	@$(RM) main.out
+
+play_bonus: test test_bonus
+	./main.out
+	./main_bonus.out
+	@$(RM) main.out main_bonus.out

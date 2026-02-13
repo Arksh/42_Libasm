@@ -22,12 +22,19 @@ extern malloc
 section .text
 ft_list_push_front:
 	push rdi
+	push rsi
 	mov rdi, LIST_SIZE
-	call malloc
+	call malloc wrt ..plt
+	pop rsi
 	pop rdi
+	
+	test rax, rax
+	jz .end
 
 	mov [rax + LIST_DATA], rsi
-	mov [rax + LIST_NEXT], [rdi]
+	mov rcx, [rdi]
+	mov [rax + LIST_NEXT], rcx
 	mov [rdi], rax
 
+.end:
 	ret
